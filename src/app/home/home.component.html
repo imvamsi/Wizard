@@ -1,0 +1,165 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <!-- Start wizard step 1 -->
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Files Upload</ng-template>
+      <div class="ui-g-12 minheight">
+        <div class="ui-g-12 file">
+          <button mat-raised-button color="accent" (click)="upload()"><span class="fa fa-plus"></span> Browse Files</button>
+          <span>
+            <ng-container *ngIf="files.length == 0">
+              No File selected
+            </ng-container>
+            <ng-container *ngIf="files.length != 0">
+              {{files.length}} Files Selected
+            </ng-container>
+          </span>
+
+          <input type="file" formControlName="files" id="upload" multiple (change)="fileUpload($event)" style="display:none">
+          <div class="error" *ngIf="!(firstFormGroup.controls['files'].valid) && firstSubmited">
+            <span>Please select Files</span>
+          </div>
+        </div>
+        <div class="ui-g-12">
+          <div class="ui-lg-6 ui-g-12 table-wrapper">
+            <table class="table table-bordered" *ngIf="files.length != 0">
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+              </tr>
+              <tr *ngFor="let item of files">
+                <td>{{item.date | date:"short"}}</td>
+                <td>{{item.name}}</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <button type="submit" mat-raised-button color="primary" (click)="next(1)" matStepperNext>Next</button>
+      </div>
+    </form>
+    <!-- End wizard step 1 -->
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <!-- Start wizard step 2 -->
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Please choose options</ng-template>
+      <div class="ui-g-12 options minheight">
+        <mat-radio-group formControlName="secondCtrl" [(ngModel)]="formData['options']">
+          <mat-radio-button value="New Client">New Client</mat-radio-button>
+          <mat-radio-button value="Existing Client">Existing Client</mat-radio-button>
+          <mat-radio-button value="Joint Account">Joint Account</mat-radio-button>
+          <mat-radio-button value="Edit Information">Edit Information</mat-radio-button>
+        </mat-radio-group>
+        <div class="error" *ngIf="!secondFormGroup.controls['secondCtrl'].valid && secondSubmited">
+          <span>Please select option</span>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="next(2)" matStepperNext>Next</button>
+      </div>
+    </form>
+    <!-- End wizard step 2 -->
+  </mat-step>
+  <mat-step [stepControl]="ThirdFormGroup">
+    <!-- Start wizard step 3 -->
+    <form [formGroup]="ThirdFormGroup">
+      <ng-template matStepLabel>Enter your Details</ng-template>
+      <div class="ui-lg-6 ui-g-12 details minheight">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" formControlName="name" [(ngModel)]="formData['name']">
+          <div class="error" *ngIf="!ThirdFormGroup.controls['name'].valid && thiredSubmited">
+            <span>Name is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <textarea class="form-control" formControlName="address" [(ngModel)]="formData['address']"></textarea>
+          <div class="error" *ngIf="!ThirdFormGroup.controls['address'].valid && thiredSubmited">
+            <span>Address is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" class="form-control" formControlName="email" [(ngModel)]="formData['email']">
+          <div class="error" *ngIf="!ThirdFormGroup.controls['email'].valid && thiredSubmited">
+            <span *ngIf="ThirdFormGroup.controls['email'].errors['required']">Email is required</span>
+            <span *ngIf="ThirdFormGroup.controls['email'].errors['pattern']">Email format is wrong</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="text" class="form-control" formControlName="phone" [(ngModel)]="formData['phone']">
+          <div class="error" *ngIf="!ThirdFormGroup.controls['phone'].valid && thiredSubmited">
+            <span *ngIf="ThirdFormGroup.controls['phone'].errors['required']">Phone is required</span>
+            <span *ngIf="ThirdFormGroup.controls['phone'].errors['pattern']">You must needed to enter 10 numbers</span>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="next(3)" matStepperNext>Next</button>
+      </div>
+    </form>
+    <!-- End wizard step 3 -->
+  </mat-step>
+  <mat-step [stepControl]="forthFormGroup">
+    <!-- Start wizard step 4 -->
+    <form [formGroup]="forthFormGroup">
+      <ng-template matStepLabel>Summary</ng-template>
+      <h3>Personal Details</h3>
+      <div class="ui-lg-8">
+        <table class="table">
+          <tr>
+            <td>Name</td>
+            <td>{{formData.name}}</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>{{formData.address}}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{formData.email}}</td>
+          </tr>
+          <tr>
+            <td>Phone No.</td>
+            <td>{{formData.phone}}</td>
+          </tr>
+          <tr>
+            <td>Options</td>
+            <td>{{formData.options}}</td>
+          </tr>
+        </table>
+      </div>
+      <ng-container>
+        <h3>Files</h3>
+        <div class="ui-lg-6 table-wrapper-1">
+          <table class="table table-bordered" *ngIf="files.length != 0">
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+            </tr>
+            <tr *ngFor="let item of files">
+              <td>{{item.date | date:"short"}}</td>
+              <td>{{item.name}}</td>
+            </tr>
+          </table>
+        </div>
+        <mat-checkbox formControlName="term" [(ngModel)]="formData['term']">Please accept term and condition</mat-checkbox>
+        <div class="error" *ngIf="!forthFormGroup.controls['term'].valid && forthSubmited">
+          <span>This field is required</span>
+        </div>
+      </ng-container>
+      <div class="final-step">
+        <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+        <button mat-raised-button type="submit" (click)="submit(forthFormGroup.valid)" color="primary">Submit</button>
+      </div>
+    </form>
+    <!-- End wizard step 4 -->
+  </mat-step>
+</mat-horizontal-stepper>

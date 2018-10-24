@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.content {
+    box-shadow: none !important;
+    margin-bottom: 30px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.footer .mat-toolbar-row span {
+    font-size: 14px;
+}
+
+.header {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.options {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.options .mat-radio-button {
+    margin-right: 50px;
+    
+}
+
+.options .mat-radio-label {
+    padding: 20px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 157px;
+    color: #ff4081;
+    background: ghostwhite;
+}
+
+.details {
+    margin: 0 auto;
+    float: none !important;
+}
+
+.error {
+    padding-top: 7px;
+    font-size: 13px;
+    color: red;
+}
+.minheight{
+    min-height: 310px;
+}
+.file {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.table-wrapper {
+    display: block;
+    margin: 0 auto;
+    float: none;
+}
+.table-wrapper .table tr th, .table-wrapper .table tr td {
+    text-align: center;
+}
+.table-wrapper-1 .table tr th, .table-wrapper-1 .table tr td {
+    text-align: center;
+}
+.final-step {
+    padding: 10px 0;
+}
