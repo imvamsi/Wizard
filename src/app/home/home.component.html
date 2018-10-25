@@ -96,7 +96,7 @@
           <input type="text" class="form-control" formControlName="phone" [(ngModel)]="formData['phone']">
           <div class="error" *ngIf="!ThirdFormGroup.controls['phone'].valid && thiredSubmited">
             <span *ngIf="ThirdFormGroup.controls['phone'].errors['required']">Phone is required</span>
-            <span *ngIf="ThirdFormGroup.controls['phone'].errors['pattern']">You must needed to enter 10 numbers</span>
+            <span *ngIf="ThirdFormGroup.controls['phone'].errors['pattern']">You must need to enter 10 numbers</span>
           </div>
         </div>
       </div>
@@ -150,7 +150,7 @@
             </tr>
           </table>
         </div>
-        <mat-checkbox formControlName="term" [(ngModel)]="formData['term']">Please accept term and condition</mat-checkbox>
+        <mat-checkbox formControlName="term" [(ngModel)]="formData['term']">Please accept terms and conditions</mat-checkbox>
         <div class="error" *ngIf="!forthFormGroup.controls['term'].valid && forthSubmited">
           <span>This field is required</span>
         </div>
